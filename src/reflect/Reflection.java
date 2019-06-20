@@ -38,10 +38,12 @@ public class Reflection {
             Annotation[][] parameterAnnotations = method.getParameterAnnotations();
             System.out.println(i);
         }
+        //暴力
         Field[] fields = people.getDeclaredFields();
         for (int i = 0; i < constructors.length; i++) {
             Field field = fields[i];
             try {
+                //暴力
                 field.setAccessible(true);
                 Object o = field.get(p);
                 System.out.println(o);
