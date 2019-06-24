@@ -28,7 +28,6 @@ public class JdbcConnection {
         while (rs.next()) {
             System.out.println(rs.getString("username") + " " + rs.getString("password"));
         }
-        List<String>list = new ArrayList<>();
         rs.close();
         st.close();
         conn.close();
