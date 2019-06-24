@@ -13,16 +13,19 @@ public class JdbcConnection {
     private static final String URL = "jdbc:mysql://127.0.0.1:3306/nongda?useUnicode=true&amp;characterEncoding=utf-8";
     private static final String USER = "root";
     private static final String PASSWORD = "root";
-    public static Connection  getInstance(){
+
+    public static Connection getInstance() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             return DriverManager.getConnection(URL, USER, PASSWORD);
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        Connection conn = JdbcConnection.getInstance();
+
+    public static void main(String[] args) throws SQLException {
+        Connection conn = ConnectionPool.getConnection();
+        System.out.println(ConnectionPool.getConnectionSize());
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery("select * from sys_user");
         while (rs.next()) {
@@ -30,6 +33,7 @@ public class JdbcConnection {
         }
         rs.close();
         st.close();
-        conn.close();
+        ConnectionPool.close(conn);
+        System.out.println(ConnectionPool.getConnectionSize());
     }
 }

@@ -11,12 +11,12 @@ import java.util.List;
  */
 public class ConnectionPool {
     private static List<Connection> pool = new ArrayList<>();
-    private static int Normal = 10; //初始化连接数
+    private static int NORMAL = 10; //初始化连接数
     private static int MAX = 20; //最大的连接数
     private static int MIN = 5; //最小的连接数
 
     static {
-        while (pool.size() < 10) {
+        while (pool.size() < NORMAL) {
             pool.add(JdbcConnection.getInstance());
         }
     }
@@ -39,13 +39,20 @@ public class ConnectionPool {
     public static void close(Connection conn) {
         if (conn != null && pool.size() < MAX) {
             pool.add(conn);
-        }else{
+        } else {
             try {
                 conn.close();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
+    public static void main(String[] args) {
+        Connection connection = ConnectionPool.getConnection();
+    }
+
+    public static int getConnectionSize() {
+        return pool.size();
+    }
 }
