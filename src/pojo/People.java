@@ -5,12 +5,17 @@ package pojo;
  * @description 人
  * @date 2019/6/18
  */
-public class People {
+public class People implements Cloneable {
     private String name;
     private Integer age;
     private int gender;
 
     public People() {
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        Object clone = super.clone();
+        return clone;
     }
 
     public People(String name, Integer age, int gender) {
