@@ -10,6 +10,6 @@ import interfaces.Subject;
 public class SubjectImpl2 implements Subject {
     @Override
     public void print() {
-        System.out.println("原方法");
+        System.out.println("原2方法");
     }
 }

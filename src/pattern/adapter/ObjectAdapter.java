@@ -9,6 +9,7 @@ import pattern.adapter.source.TargetInterface;
  * @date 2019/6/26
  */
 public class ObjectAdapter implements TargetInterface {
+    //持有对象
     private Source source;
 
     public ObjectAdapter(Source source) {
