@@ -1,4 +1,4 @@
-package pattern.factory;
+package pattern.factory.common_factory;
 
 import interfaces.Subject;
 import interfaces.impl.SubjectImpl;
