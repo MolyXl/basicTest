@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
  * @description cglib动态代理
  * @date 2019/6/20
  */
+//代理类是目标类的子类
 public class CglibProxy implements MethodInterceptor {
 
     public <T>T getCglibProxy(Class<T> c){

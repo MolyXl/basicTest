@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @author MaZhuli
- * @description 数据库连接池
+ * @description 模拟数据库连接池
  * @date 2019/6/24
  */
 public class ConnectionPool {
