@@ -15,7 +15,6 @@ public class Computer {
         this.cpu = cpu;
         this.memory = memory;
         this.thread = thread;
-
     }
 
     public void startUp() {
