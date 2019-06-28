@@ -5,7 +5,7 @@ package pattern.interpreter;
  * @description
  * @date 2019/6/27
  */
-//解释着模式
+//解释者模式
 public interface Expression {
     public int interpret(Context context);
 
