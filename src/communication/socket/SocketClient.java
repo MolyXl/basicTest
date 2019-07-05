@@ -33,7 +33,6 @@ public class SocketClient {
             sb.append(new String(bytes, 0, len,"UTF-8"));
         }
         System.out.println("get message from server: " + sb);
-
         inputStream.close();
         outputStream.close();
         socket.close();

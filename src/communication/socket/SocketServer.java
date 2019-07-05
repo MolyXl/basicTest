@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author MaZhuli
@@ -28,12 +29,12 @@ public class SocketServer {
         //只有当客户端关闭它的输出流的时候，服务端才能取得结尾的-1
         while ((len = inputStream.read(bytes)) != -1) {
             // 注意指定编码格式，发送方和接收方一定要统一，建议使用UTF-8
-            sb.append(new String(bytes, 0, len, "UTF-8"));
+            sb.append(new String(bytes, 0, len, StandardCharsets.UTF_8));
         }
         System.out.println("get message from client: " + sb);
 
         OutputStream outputStream = socket.getOutputStream();
-        outputStream.write("Hello Client,I get the message.".getBytes("UTF-8"));
+        outputStream.write("Hello Client,I get the message.".getBytes(StandardCharsets.UTF_8));
 
         inputStream.close();
         outputStream.close();
