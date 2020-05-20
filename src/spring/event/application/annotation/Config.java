@@ -7,6 +7,8 @@ import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 
 
@@ -35,5 +37,14 @@ public class Config {
         result.setThreadNamePrefix("applicationEventMulticasterThreadPool-");
         result.setCorePoolSize(5);
         return result;
+    }
+
+    public static void main(String[] args) {
+        List list = new ArrayList();
+        list.add(1);
+        List clone = (List) ((ArrayList) list).clone();
+        clone.add(2);
+        System.out.println(list.size());
+        System.out.println(clone.size());
     }
 }
