@@ -1,4 +1,4 @@
-package spring.event.application;
+package spring.event.application.annotation;
 
 import org.springframework.context.ApplicationEvent;
 
@@ -13,7 +13,7 @@ public class UserRegistryEvent extends ApplicationEvent {
     /*public UserRegistryEvent(Object source) {
         super(source);
     }*/
-    public UserRegistryEvent(Object source,String userName) {
+    public UserRegistryEvent(Object source, String userName) {
         super(source);
         this.userName = userName;
     }
