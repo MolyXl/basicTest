@@ -13,6 +13,7 @@ public class BasicSort {
      * @date: 2020/6/9 11:10
      */
     public static void insertSort(int[] array) {        //将新的元素插入到已排好序的数组中,(有序数组可做二分快速查找)
+        //时间复杂度:最好(O(N)),平均(O(N2)),最坏(O(N2));空间复制度:O(1);稳定
         for (int i = 1; i < array.length; i++) {
             int j;
             int insertedNum = array[i];
@@ -30,6 +31,7 @@ public class BasicSort {
      * @date: 2020/6/9 11:10
      */
     public static void bubleSort(int[] array) {         //从前向后,遍历剩余数组中每个值,与当前值比较大小并交换
+        //时间复杂度:最好(O(N)),平均(O(N2)),最坏(O(N2));空间复制度:O(1);稳定
         for (int i = 0; i < array.length - 1; i++) {
             for (int j = i + 1; j < array.length; j++) {
                 if (array[j] < array[i]) {
@@ -48,6 +50,7 @@ public class BasicSort {
      * @date: 2020/6/9 11:10
      */
     public static void selectionSort(int[] array) {         //从前向后,查询剩余数组中的最小值与当前值交换
+        //时间复杂度:最好(O(N2)),平均(O(N2)),最坏(O(N2));空间复制度:O(1);不稳定
         for (int i = 0; i < array.length - 1; i++) {
             int min = i;
             for (int j = i + 1; j < array.length; j++) {
