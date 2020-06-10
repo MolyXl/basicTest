@@ -4,7 +4,7 @@ import interfaces.Plant;
 
 /**
  * @author MaZhuli
- * @description 苹果树
+ * @description 香蕉树
  * @date 2019/6/26
  */
 public class BananaTree implements Plant {
