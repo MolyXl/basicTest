@@ -1,4 +1,4 @@
-package structure;
+package arithmetic.structure;
 
 /**
  * @author mazhuli
