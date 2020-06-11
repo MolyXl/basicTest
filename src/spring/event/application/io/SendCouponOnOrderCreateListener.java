@@ -1,7 +1,6 @@
-package spring.event.application.Io;
+package spring.event.application.io;
 
 import org.springframework.context.ApplicationListener;
-import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +18,6 @@ public class SendCouponOnOrderCreateListener implements ApplicationListener<User
 
     @Override
     public int getOrder() {
-        return 0;
+        return 1;
     }
 }

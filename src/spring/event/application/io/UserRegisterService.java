@@ -1,4 +1,4 @@
-package spring.event.application.Io;
+package spring.event.application.io;
 
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;

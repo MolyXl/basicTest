@@ -1,4 +1,4 @@
-package spring.event.application.Io;
+package spring.event.application.io;
 
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

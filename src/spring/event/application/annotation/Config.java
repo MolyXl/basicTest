@@ -39,12 +39,4 @@ public class Config {
         return result;
     }
 
-    public static void main(String[] args) {
-        List list = new ArrayList();
-        list.add(1);
-        List clone = (List) ((ArrayList) list).clone();
-        clone.add(2);
-        System.out.println(list.size());
-        System.out.println(clone.size());
-    }
 }

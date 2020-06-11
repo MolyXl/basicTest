@@ -1,4 +1,4 @@
-package spring.event.application.Io;
+package spring.event.application.io;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.Ordered;
