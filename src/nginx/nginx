@@ -48,10 +48,10 @@ http {
             #backup	标记该服务器为备用服务器。当主服务器停止时，请求会被发送到它这里
             #down	标记服务器永久停机了
 		ip_hash;#同一个ip定位到同一个服务器
-		hash $request_uri;#同一个url定位到同一个服务器
 		least_conn;#把请求转发给连接数较少的后端服务器
-        server 192.168.54.140:8088 weight=1;
-        server 127.0.0.1:8088 weight=3;
+		#第三方
+		hash $request_uri;#同一个url定位到同一个服务器
+		fair;#转发给连接最少的服务器
     }
 
     server {
