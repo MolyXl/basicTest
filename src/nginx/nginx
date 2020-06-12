@@ -31,11 +31,6 @@ http {
     keepalive_timeout  65;
 
     #gzip  on;
-	upstream mynginx {
-        server ip+port;
-        server ip+port;
-        server ip+port;
-    }
 
     upstream tomcats {
         #默认轮询方式
@@ -52,6 +47,11 @@ http {
 		#第三方
 		hash $request_uri;#同一个url定位到同一个服务器
 		fair;#转发给连接最少的服务器
+
+
+		server ip+port;
+        server ip+port;
+        server ip+port;
     }
 
     server {
