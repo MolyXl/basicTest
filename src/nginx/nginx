@@ -1,0 +1,101 @@
+
+#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+	upstream mynginx {
+        server ip+port;
+        server ip+port;
+        server ip+port;
+    }
+
+    upstream tomcats {
+        #默认轮询方式
+            #fail_timeout	与max_fails结合使用
+                #Nginx基于连接探测，如果发现后端异常，在单位周期为fail_timeout设置的时间，中达到max_fails次数，这个周期次数内，如果后端同一个节点不可用，
+                #那么接将把节点标记为不可用，并等待下一个周期（同样时常为fail_timeout）再一次去请求，判断是否连接是否成功。如果成功，将恢复之前的轮询方式，
+                #如果不可用将在下一个周期(fail_timeout)再试一次。
+            #max_fails	设置在fail_timeout参数设置的时间内最大失败次数，如果在这个时间内，所有针对该服务器的请求都失败了，那么认为该服务器会被认为是停机了
+            #fail_time	服务器会被认为停机的时间长度,默认为10s
+            #backup	标记该服务器为备用服务器。当主服务器停止时，请求会被发送到它这里
+            #down	标记服务器永久停机了
+		ip_hash;#同一个ip定位到同一个服务器
+		hash $request_uri;#同一个url定位到同一个服务器
+		least_conn;#把请求转发给连接数较少的后端服务器
+        server 192.168.54.140:8088 weight=1;
+        server 127.0.0.1:8088 weight=3;
+    }
+
+    server {
+        listen 80;
+
+        location / {
+            proxy_pass http://tomcats;#指向upstream tomcats
+        }
+    }
+
+
+    # another virtual host using mix of IP-, name-, and port-based configuration
+    #
+    #server {
+    #    listen       8000;
+    #    listen       somename:8080;
+    #    server_name  somename  alias  another.alias;
+
+    #    location / {
+    #        root   html;
+    #        index  index.html index.htm;
+    #    }
+    #}
+
+
+    # HTTPS server
+    #
+    #server {
+    #    listen       443 ssl;
+    #    server_name  localhost;
+
+    #    ssl_certificate      cert.pem;
+    #    ssl_certificate_key  cert.key;
+
+    #    ssl_session_cache    shared:SSL:1m;
+    #    ssl_session_timeout  5m;
+
+    #    ssl_ciphers  HIGH:!aNULL:!MD5;
+    #    ssl_prefer_server_ciphers  on;
+
+    #    location / {
+    #        root   html;
+    #        index  index.html index.htm;
+    #    }
+    #}
+
+}
