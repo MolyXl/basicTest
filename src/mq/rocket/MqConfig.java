@@ -26,8 +26,8 @@ public class MqConfig {
     public static final String GROUP_ID = "GID_Test";
     public static final String ORDER_TOPIC = "XXX";
     public static final String ORDER_GROUP_ID = "XXX";
-    public static final String ACCESS_KEY = "LTAI4Fhc5GhHdo7h6VULpyDo";
-    public static final String SECRET_KEY = "VXNi5ziHzqKYewyE74C7vCwHq6smwR";
+    public static final String ACCESS_KEY = "XXXXXXXXXXXXXXX";
+    public static final String SECRET_KEY = "XXXXXXXXXXXXXXX";
     public static final String TAG = "mq_test_tag";
     public static final String NAMESRV_ADDR = "http://MQ_INST_1009615984856845_Bcf9AvkQ.mq-internet-access.mq-internet.aliyuncs.com:80";
 
