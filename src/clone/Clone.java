@@ -65,6 +65,8 @@ public class Clone implements Cloneable {
         System.out.println(origin.name);
         System.out.println(copy.name);
         System.out.println(copy.people);
+        System.out.println(origin);
+        System.out.println(copy);
         //浅复制,只是当前对象不同,对象的引用型属性仍是同一个
         //深复制,当前对象和引用对象的属性都不是同一个
     }
