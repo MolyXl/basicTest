@@ -1,0 +1,32 @@
+master my.ini
+
+    server-id=1
+    log_bin=master-bin
+    log_bin_index=master-bin.index
+    binlog_do_db=test   #要复制的数据库
+
+slave my.ini
+
+    server-id=2
+    relay-log=slave-relay-bin
+    relay-log-index=slave-relay-bin.index
+
+master sql
+    create user slave;
+    grant replication slave on *.* to slave@'从库ip' identified by '密码';
+    flush privileges;
+
+    show master status;
+    -->
+        File                        Position
+        master-bin.000008	        120
+slave sql
+    change master to master_host='主库ip',master_port=端口,master_user='slave',master_password='密码',master_log_file='master-bin.000008',master_log_pos=120;
+    reset slave;# 防止此问题 Slave failed to initialize relay log info structure from the repository
+    start slave;
+    show slave status;
+    -->
+        Slave_Io_Running        Slave_Sql_Running
+        Yes                     Yes
+
+    stop slave;
