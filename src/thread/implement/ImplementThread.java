@@ -25,10 +25,10 @@ public class ImplementThread implements Runnable {
         ImplementThread implementThread = new ImplementThread();
         Thread thread1 = new Thread(implementThread);
         Thread thread2 = new Thread(implementThread);
-        thread1.setDaemon(true);//设置守护线程
+        thread1.setDaemon(false);//设置守护线程
         thread1.start();
-        thread1.join(10000);//等待该线程执行完毕后才执行别的线程
-        thread1.wait(3000);//计时等待(如果带时间参数)
+        //thread1.join();//等待该线程执行完毕后才执行别的线程
+        //thread1.wait(3000);//计时等待(如果带时间参数)
         String name = Thread.currentThread().getName();
         System.out.println(name);
     }

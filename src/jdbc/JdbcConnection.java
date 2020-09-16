@@ -10,13 +10,13 @@ import java.util.List;
  * @date 2019/6/24
  */
 public class JdbcConnection {
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/nongda?useUnicode=true&amp;characterEncoding=utf-8";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/jadeite?useUnicode=true&amp;characterEncoding=utf-8";
     private static final String USER = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "mylord";
 
     public static Connection getInstance() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            //Class.forName("com.mysql.jdbc.Driver");
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (Exception e) {
             return null;
@@ -24,7 +24,9 @@ public class JdbcConnection {
     }
 
     public static void main(String[] args) throws SQLException {
-        Connection conn = ConnectionPool.getConnection();
+        Connection instance = getInstance();
+        System.out.println(instance);
+        /*Connection conn = ConnectionPool.getConnection();
         System.out.println(ConnectionPool.getConnectionSize());
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery("select * from sys_user");
@@ -34,6 +36,6 @@ public class JdbcConnection {
         rs.close();
         st.close();
         ConnectionPool.close(conn);
-        System.out.println(ConnectionPool.getConnectionSize());
+        System.out.println(ConnectionPool.getConnectionSize());*/
     }
 }
