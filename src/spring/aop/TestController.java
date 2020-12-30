@@ -4,6 +4,7 @@ import aspect.Radar;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -21,4 +22,10 @@ public class TestController {
         return userInfo;
     }
 
+    public static void main(String[] args) {
+        TestController testController = new TestController();
+        Map userInfo = new HashMap();
+        userInfo.put("age",12);
+        testController.add(userInfo);
+    }
 }

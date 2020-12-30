@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
  */
 @Aspect
 public class Missile {
-    @Pointcut("@annotation(aspect.Radar)")
+    @Pointcut("@annotation(Radar)")
     public void intercept() {
     }
 
@@ -54,7 +54,7 @@ public class Missile {
     // 在接口上声明不起作用,子孙类经测试匹配不到
 
     //@annotation(M)的匹配规则
-    @Around(value = "@annotation(LogRecord) || @within(LogRecord)")
+    @Around("intercept()")
     public Object logRecord(ProceedingJoinPoint pjp) throws Throwable {
 
         //1.获取类上的注解
