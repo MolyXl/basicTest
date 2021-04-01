@@ -23,7 +23,7 @@ public class Reflection {
             System.out.println(i);
         }
         Method[] methods = people.getMethods();
-        for (int i = 0; i < constructors.length; i++) {
+        for (int i = 0; i < methods.length; i++) {
             Method method = methods[i];
             int parameterCount = method.getParameterCount();
             Parameter[] parameters = method.getParameters();
