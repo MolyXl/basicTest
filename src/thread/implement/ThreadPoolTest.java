@@ -2,9 +2,7 @@ package thread.implement;
 
 import java.util.concurrent.*;
 
-import static java.util.concurrent.TimeUnit.NANOSECONDS;
-
-public class TheradPoolTest {
+public class ThreadPoolTest {
     public static void main(String[] args) {
         ExtendThread extendThread = new ExtendThread();
         //查看源码

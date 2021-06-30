@@ -91,5 +91,7 @@ public class AdvancedSort {
         System.out.println(System.currentTimeMillis());
         quickSort(arr, 0, arr.length - 1);
         System.out.println(System.currentTimeMillis());
+        BubbleSort.bubbleSort(arr);
+        System.out.println(System.currentTimeMillis());
     }
 }
