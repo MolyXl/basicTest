@@ -1,4 +1,152 @@
 #安装服务
-mysqld --install Mysql5.6.10 --defaults-file="D:\develop\mysql-5.6.47-10\my.ini"
+    mysqld --install Mysql5.6.10 --defaults-file="D:\develop\mysql-5.6.47-10\my.ini"
 #删除服务
-sc delete Mysql5.6.10
+    sc delete Mysql5.6.10
+#查看存储引擎
+    show engines;
+#查看系统变量及其值：
+    SHOW VARIABLES;
+#mysql中采⽤ ⽤户名+主机名 来识别⽤户的⾝份
+#刷新权限
+    flush privileges;
+#创建用户
+    create user 'test2'@'localhost' identified by '123';
+    create user 'test3'@% identified by '123';
+    create user 'test4'@'192.168.11.%' identified by '123';
+#修改密码
+    SET PASSWORD FOR '⽤户名'@'主机' = PASSWORD('密码');
+    use mysql;
+    update user set authentication_string = password('321') where user = 'test1' and host = '%';
+    flush privileges;
+
+#⽤户授权
+    grant privileges ON database.table TO 'username'[@'host'] [with grant option];
+    grant all on *.* to 'test1'@‘%’;
+    说明：给test1授权可以操作所有库所有权限，相当于dba
+    grant select on seata.* to 'test1'@'%';
+    说明：test1可以对seata库中所有的表执⾏select
+    grant select,update on seata.* to 'test1'@'%';说明：test1可以对seata库中所有的表执⾏select、update
+    grant select(user,host) on mysql.user to 'test1'@'localhost';
+    说明：test1⽤户只能查询mysql.user表的user,host字段
+#查看用户权限
+    show grants	for	'⽤户名'[@'主机']
+    主机可以省略，默认值为%，⽰例：
+    mysql> show grants for 'test1'@'localhost';
+#撤销⽤户的权限
+    revoke privileges ON database.table FROM '⽤户名'[@'主机'];
+#删除⽤户
+    drop user '⽤户名'[@‘主机’];
+    delete from user where user='⽤户名' and host='主机';
+    flush privileges;
+
+#创建库
+    create database [if not exists] 库名;
+#删除库
+    drop databases [if exists] 库名;
+
+#创建表
+    create table 表名(
+				字段名1 类型[(宽度)] [约束条件] [comment '字段说明'],
+				字段名2 类型[(宽度)] [约束条件] [comment '字段说明'],
+				字段名3 类型[(宽度)] [约束条件] [comment '字段说明']
+    )[表的⼀些设置];
+#删除表
+    drop table [if exists] 表名;
+#修改表名
+    alter table 表名 rename [to] 新表名;
+#表设置备注
+    alter table 表名 comment '备注信息';
+#复制表 只复制表结构
+    create table 表名 like 被复制的表名;
+#复制表结构+数据
+    create table 表名 [as] select 字段,... from 被复制的表 [where 条件];
+#添加列
+    alter table 表名 add column 列名 类型 [列约束];
+#修改列
+    alter table 表名 modify column 列名 新类型 [约束];   不能修改列名
+    alter table 表名 change column 列名 新列名 新类型 [约束];
+#删除列
+    alter table 表名 drop column 列名;
+
+#mysql分组中的坑，分组中select后⾯的列只能有2种：
+    1. 出现在group by后⾯的列
+    2. 使⽤聚合函数的列
+
+    select @@sql_mode;
+    修改mysql中的my.ini⽂件,将ONLY_FULL_GROUP_BY去掉
+#数值函数
+    abs:求绝对值;
+    sqrt:求⼆次⽅跟（开⽅;
+    mod:求余数;
+    ceil和ceiling:向上取整;
+    floor:向下取整;
+    rand:⽣成⼀个随机数;
+    round:四舍五⼊函数;
+    sign:返回参数的符号;
+    pow 和 power:次⽅函数;
+    sin:正弦函数;
+#字符串函数
+    length:返回字符串直接⻓度;
+    concat:合并字符串;
+    insert:替换字符串;   INSERT(str,pos,len,newStr)
+    lower:将字⺟转换成⼩写;
+    upper:将字⺟转换成⼤写;
+    left:从左侧截取字符串;
+    right:从右侧截取字符串;
+    trim:删除字符串两侧空格;
+    replace:字符串替换;
+    substr 和 substring:截取字符串;
+    reverse:反转字符串;
+#⽇期和时间函数
+    curdate 和 current_date:两个函数作⽤相同，返回当前系统的⽇期值;
+    curtime 和 current_time:获取系统当前时间;
+    now 和 sysdate:获取当前时间⽇期;
+    unix_timestamp:获取UNIX时间戳;
+    from_unixtime:时间戳转⽇期;
+    month:获取指定⽇期的⽉份;
+    monthname:获取指定⽇期⽉份的英⽂名称;
+    dayname:获取指定⽇期的星期名称;
+    dayofweek:获取⽇期对应的周索引;
+    week:获取指定⽇期是⼀年中的第⼏周;
+    dayofyear:获取指定⽇期在⼀年中的位置;
+    dayofmonth:获取指定⽇期在⼀个⽉的位置;
+    year:获取年份;
+    time_to_sec:将时间转换为秒值;
+    sec_to_time:将秒值转换为时间格式;
+    date_add和adddate:向⽇期添加指定时间间隔;
+    date_sub和subdate:⽇期减法运算;
+    adddtime:时间加法运算;
+    subtime:时间减法运算;
+    datediff:获取两个⽇期的时间间隔;
+    date_format:格式化指定的⽇期;
+    weekday:获取指定⽇期在⼀周内的索引位置;
+#聚合函数
+    if:判断
+    IF(expr,v1,v2)
+    当expr为真是返回v1的值，否则返回v2;
+
+    ifnull:判断是否为空
+    IFNULL(v1,v2)：v1为空返回v2，否则返回v1;
+
+    case:搜索语句
+
+    ⽅式1：
+    CASE <表达式>
+     WHEN <值1> THEN <操作>
+     WHEN <值2> THEN <操作>
+     ...
+     ELSE <操作>
+    END;
+    ⽅式2：
+    CASE
+     WHEN <条件1> THEN <命令>
+     WHEN <条件2> THEN <命令>
+     ...
+     ELSE commands
+    END;
+#事务
+    原子,一致,隔离,持久
+    脏读,不可重复读,幻读
+    读未提交,读已提交,可重复读,串行化
+
+
