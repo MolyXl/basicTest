@@ -1,2 +1,3 @@
-/out/production/basicTest/spring/event/theory/UserRegisterSuccessEvent.class
-/out/production/basicTest/spring/event/theory/UserRegisterService.class
+/out/**
+*.xml
+*.iml
