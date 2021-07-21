@@ -170,6 +170,32 @@
         drop index 索引名称 on 表名;
     查看索引
         show index from 表名;
-
+    最左匹配原则 ->mysql会⼀直向右匹配直到遇到范围查询(>、<、between、like)就停⽌匹配
+    索引区分度 ->默认走索引区分度高的
+    模糊查询 ->左侧有%不会走索引
+    索引覆盖 ->不需要走回表过程
+    索引下推 ->使用联合索引,将需要过滤字段包含在索引中,避免回表
+    数字使字符串类索引失效
+    函数使索引⽆效
+    运算符使索引⽆效
+    使⽤索引优化排序
+#mysql确保数据不丢失原理
+    1. mysql收到start	transaction后，⽣成⼀个全局的事务编号trxid，⽐如trxid=10
+    2. userid=666这个记录我们就叫r1，userid=888这个记录叫r2
+    3. 找到r1记录所在的数据页p1，将其从磁盘中加载到内存中
+    4. 在内存中对p1进⾏修改
+    5. 将p1修改操作记录到redo log buffer中
+    6. 将p1修改记录流⽔记录到binlog	cache中
+    7. 找到r2记录所在的数据页p2，将其从磁盘中加载到内存中
+    8. 在内存中对p2进⾏修改
+    9. 将p2修改操作记录到redo log buffer中
+    10. 将p2修改记录流⽔记录到binlog	cache中
+    11. mysql收到commit指令
+    12. 将redo log buffer携带trx_id=10写⼊到redo log⽂件，持久化到磁盘，这步操作叫做 redo log prepare，内容如下
+        1.start	trx=10;	2.写⼊rb1	3.写⼊rb2	4.prepare	trx=10;
+        注意上⾯是prepare了，不是之前说的end了。
+    13. 将binlog	cache携带trx_id=10写⼊到binlog⽂件，持久化到磁盘
+    14. 向redo	log中写⼊⼀条数据：end trx=10;表⽰redo	log中这个事务完成了，这步操作叫做redo	log	commit
+    15. 返回给客户端更新成功
 
 
